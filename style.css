@@ -141,7 +141,7 @@ body {
 }
 
 .scroll-indicator p {
-    font-size: 14px;
+    font-size: 8px;
     color: #666;
     margin-bottom: 10px;
     font-weight: 500;
@@ -213,7 +213,10 @@ body {
     display: flex;
     gap: 30px;
     align-items: flex-start;
+    position: relative;
 }
+
+
 
 /* Introduction content */
 .introduction-content {
@@ -239,29 +242,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 15px 15px 30px 15px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: rotate(3deg);
+    transition: all 0.4s ease;
+    border-radius: 2px;
+    margin: 10px 20px;
+}
+
+.intro-photo-right:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .intro-photo-right>img {
-    width: 170px;
-    height: 220px;
+    width: 130px;
+    height: 170px;
     object-fit: cover;
     object-position: center;
-    border-radius: 15px;
-    box-shadow:
-        0 15px 35px rgba(102, 126, 234, 0.4),
-        0 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1px;
+    opacity: 1;
+    box-shadow: none;
+    display: block;
 }
 
 .intro-photo-right::after {
-    content: '';
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 25px;
-    background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.25) 0%, transparent 70%);
-    z-index: -1;
+    display: none;
 }
 
 /* Signature styling */
@@ -319,12 +326,12 @@ body {
     font-weight: 600;
     font-size: 14px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 15px rgba(102, 126, 234, 0.4);
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 20px 80px rgba(102, 126, 234, 0.5);
 }
 
 @keyframes fadeInUp {
@@ -1330,7 +1337,31 @@ body {
     .intro-photo-right {
         width: 100%;
         display: flex;
-        justify-content: center;
+
+        transform: rotate(0deg);
+        margin: 20px 0;
+    }
+
+    .intro-photo-right::before {
+        display: none;
+    }
+
+    .intro-photo-right::after {
+        display: none;
+    }
+
+    .steel-pin {
+        top: 5px;
+        left: 5px;
+        width: 4px;
+    }
+
+    .intro-photo-right:hover {
+        transform: scale(1.02);
+    }
+
+    .intro-photo-right:hover .steel-pin {
+        transform: scale(1.1) rotate(-10deg);
     }
 
     .intro-photo-right img {
