@@ -53,6 +53,44 @@ const projectsData = [
         title: "XSS＆CSRF対策",
         category: "cybersecurity",
         description: "クロスサイトスクリプティング（XSS）およびクロスサイトリクエストフォージェリ（CSRF）攻撃に対する包括的な保護を実装しました。"
+    },
+    {
+        id: 10,
+        title: "ネットワーク設計・トポロジー構築実習",
+        category: "practical-labs",
+        description: "Cisco Packet Tracerを使用した実践的なネットワーク設計・トポロジー構築演習。Router、Switch、VLAN、STP、OSPF、EIGRP、ACL、DHCP、DNS、HTTPなどの設定と実装を通じて、実際の企業ネットワーク構築に必要な知識とスキルを習得。",
+        topologies: [
+            {
+                name: "Hybrid Star-Bus-Tree Topology",
+                image: "topologies/Hybrid Star-Bus:Tree topology.png",
+                description: "複数のスター型ネットワークをルーターで相互接続したハイブリッド・ツリー構成。実社会における中小企業の拠点間通信を再現。左側（192.168.1.x）と右側（192.168.10.x）は独立したLAN環境。中央のルーター群（Router0, Router1, Router2）を介してデータ通信。HTTPサーバーやSYSLOGサーバーなどの集中管理機能に加え、セルタワーを通じたモバイル接続も組み込まれた実用的なモデル。"
+            },
+            {
+                name: "Enterprise Three-Tier Network",
+                image: "topologies/Enterprise WAN.png",
+                description: "3階層階層型モデル (Three-Tier Hierarchical Model)。コア層にロードバランサーとFirewall ASA、中間的なディストリビューション層はVLAN間のルーティングを制御。スケーラビリティに優れた信頼性の高いモデル。"
+            },
+            {
+                name: "Inter-VLAN & Site Connectivity",
+                image: "topologies/Inter-VLAN & Site Connectivity.png",
+                description: "マルチレイヤスイッチ (L3 Switch) とルーターを組み合わせた、現代のオフィスビルや小規模拠点における標準的なネットワーク設計。左側の構成では、2つのマルチレイヤスイッチがルーター（ISR4331）に集約されており、異なる部署（VLAN）間での効率的なデータ転送を可能にする「VLAN間ルーティング」の実装を示唆している。右側の独立した路由器とPCのセグメントは、シリアル接続やVPNを介した遠隔拠点との通信を表現しており、企業内でのセキュアな拠点間接続（Site-to-Site Connectivity）をシミュレートしている。"
+            },
+            {
+                name: "Advanced L3 Inter-VLAN Routing",
+                image: "topologies/Advanced L3 Inter-VLAN Routing.png",
+                description: "従来の「Router-on-a-stick」構成よりも高速なデータ処理を実現した、大規模オフィスやデータセンターの標準的な設計です。3560シリーズのL3スイッチがVLAN間通信をハードウェアレベルで高速処理し、上位ルーターが拠点間接続を担います。また、サーバーを特定スイッチに集約することで、効率的なリソース管理とセキュリティを両立させています。"
+            },
+            {
+                name: "L3スイッチによる高速VLAN間ルーティング構成",
+                image: "topologies/L3スイッチによる高速VLAN間ルーティング構成.png",
+                description: "3560シリーズのL3スイッチを核とした、大規模組織向けの標準的なネットワークアーキテクチャ。従来のルーター集約型（Router-on-a-stick）よりも高速なハードウェア処理により、異なる部署（VLAN）間のスムーズな通信を実現。上位ルーターが拠点間接続（Site-to-Site Connectivity）を担い、サーバーを特定スイッチに集約することで、管理の効率化と強固なセキュリティを両立させた実用的な設計。"
+            },
+            {
+                name: "L3スイッチとIoTを統合した次世代ネットワーク構成",
+                image: "topologies/Next-Generation Network Architecture- Integrating L3 Switching & IoT.png",
+                description: "3560シリーズのL3スイッチによる高速VLAN間ルーティングに加え、最新のIoTエコシステムを融合させた高度なアーキテクチャ。ウェブカメラ、スモークディテクター、スマートカーなどのIoTデバイスがホームゲートウェイやクラウドを介して相互に接続されている。上位のISRルーターが拠点間接続をセキュアに管理し、サーバーを集約することでデータ処理の効率化と強固なセキュリティを両立。スマートオフィスや産業自動化において最も標準的かつ実用的な設計モデル。"
+            }
+        ]
     }
 ];
 
@@ -66,6 +104,66 @@ function renderProjects(category) {
     if (filteredProjects.length === 0) {
         projectsContainer.innerHTML = '<div class="no-projects"><p>このカテゴリーにはプロジェクトが見つかりません。</p></div>';
         return;
+    }
+
+    // Special handling for practical-labs - show topologies
+    if (category === 'practical-labs') {
+        const project = filteredProjects[0];
+        if (project.topologies && project.topologies.length > 0) {
+            // Create topologies grid container
+            const topologiesContainer = document.createElement('div');
+            topologiesContainer.className = 'topologies-grid';
+
+            // Add main project description
+            const projectItem = document.createElement('div');
+            projectItem.className = 'project-item';
+            projectItem.style.gridColumn = '1 / -1';
+            projectItem.style.marginBottom = '30px';
+            projectItem.innerHTML = `
+                <div class="project-item-content">
+                    <h3 class="project-item-title">${project.title}</h3>
+                    <p class="project-item-description">${project.description}</p>
+                </div>
+            `;
+            projectsContainer.appendChild(projectItem);
+
+            // Add topologies heading
+            const topologiesHeading = document.createElement('h3');
+            topologiesHeading.className = 'topologies-heading';
+            topologiesHeading.textContent = 'ネットワークトポロジー';
+            topologiesHeading.style.gridColumn = '1 / -1';
+            topologiesHeading.style.color = '#667eea';
+            topologiesHeading.style.marginTop = '20px';
+            topologiesHeading.style.marginBottom = '10px';
+            projectsContainer.appendChild(topologiesHeading);
+
+            // Add each topology as a card
+            project.topologies.forEach((topology, index) => {
+                const topologyCard = document.createElement('div');
+                topologyCard.className = 'topology-card';
+                topologyCard.innerHTML = `
+                    <div class="topology-image" onclick="openTopologyModal('${topology.image}', '${topology.name}')">
+                        <img src="${topology.image}" alt="${topology.name}">
+                    </div>
+                    <div class="topology-info">
+                        <h4 class="topology-name">${topology.name}</h4>
+                        <p class="topology-description">${topology.description}</p>
+                    </div>
+                `;
+                projectsContainer.appendChild(topologyCard);
+            });
+
+            // Add modal HTML
+            const modalHTML = `
+                <div id="topology-modal" class="topology-modal" onclick="closeTopologyModal()">
+                    <span class="modal-close">&times;</span>
+                    <img class="modal-content" id="modal-image">
+                    <div id="modal-caption"></div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            return;
+        }
     }
 
     // Show only first 3 projects
@@ -103,16 +201,77 @@ document.addEventListener('DOMContentLoaded', function () {
     // Project category button click handlers
     const projectNavBtns = document.querySelectorAll('.project-nav-btn');
     projectNavBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
+            // Skip if it's a dropdown toggle (handled by dropdown items)
+            if (this.classList.contains('dropdown-toggle')) {
+                return;
+            }
+
             // Remove active class from all buttons
             projectNavBtns.forEach(b => b.classList.remove('active'));
+
+            // Also remove active from dropdown items
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
             // Add active class to clicked button
             this.classList.add('active');
+
             // Render filtered projects
             const category = this.getAttribute('data-category');
             renderProjects(category);
         });
     });
+
+    // Dropdown item click handlers
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            // Remove active class from all dropdown items
+            dropdownItems.forEach(i => i.classList.remove('active'));
+
+            // Add active class to clicked dropdown item
+            this.classList.add('active');
+
+            // Get category and render projects
+            const category = this.getAttribute('data-category');
+            renderProjects(category);
+        });
+    });
+
+    // Keep dropdown toggle active when hovering (desktop only)
+    const dropdownContainer = document.querySelector('.dropdown-container');
+    if (dropdownContainer) {
+        dropdownContainer.addEventListener('mouseenter', function () {
+            document.querySelector('.dropdown-toggle').classList.add('hover-active');
+        });
+        dropdownContainer.addEventListener('mouseleave', function () {
+            document.querySelector('.dropdown-toggle').classList.remove('hover-active');
+        });
+
+        // Mobile click handler for dropdown toggle
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        dropdownToggle.addEventListener('click', function (e) {
+            // Only on mobile (< 768px)
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownContainer.classList.toggle('active');
+            }
+        });
+
+        // Close dropdown when clicking outside on mobile
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                if (!dropdownContainer.contains(e.target)) {
+                    dropdownContainer.classList.remove('active');
+                }
+            }
+        });
+    }
 
     // Sidebar navigation for projects.html
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -125,4 +284,33 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
         });
     });
+});
+
+// Modal functions for topology images
+function openTopologyModal(imageSrc, caption) {
+    const modal = document.getElementById('topology-modal');
+    const modalImg = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-caption');
+
+    if (modal && modalImg) {
+        modal.style.display = "flex";
+        modalImg.src = imageSrc;
+        if (modalCaption) {
+            modalCaption.innerHTML = caption;
+        }
+    }
+}
+
+function closeTopologyModal() {
+    const modal = document.getElementById('topology-modal');
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        closeTopologyModal();
+    }
 });

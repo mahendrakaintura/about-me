@@ -54,8 +54,14 @@
                 <!-- Project Category Container (like tabs-container) -->
                 <div class="tabs-container">
                     <div class="project-navbar">
-                        <button class="project-nav-btn active" data-category="system">システム</button>
-                        <button class="project-nav-btn" data-category="networking">ネットワーキング</button>
+                        <button class="project-nav-btn" data-category="system">システム</button>
+                        <div class="dropdown-container">
+                            <button class="project-nav-btn dropdown-toggle" data-category="networking">ネットワーキング</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item active" data-category="networking">すべてのネットワーキング</button>
+                                <button class="dropdown-item" data-category="practical-labs">Practical Labs</button>
+                            </div>
+                        </div>
                         <button class="project-nav-btn" data-category="cybersecurity">サイバーセキュリティ</button>
                     </div>
 
