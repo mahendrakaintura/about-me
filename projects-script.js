@@ -46,7 +46,7 @@ const projectsData = [
         id: 8,
         title: "CTFチャレンジソリューション",
         category: "cybersecurity",
-        description: "暗号化、リバースエンジニアリング、Web攻略を含むCapture The Flagチャレンジを解決しました。"
+        description: "暗号化、リ버스エンジニアリング、Web攻略を含むCapture The Flagチャレンジを解決しました。"
     },
     {
         id: 9,
@@ -56,29 +56,14 @@ const projectsData = [
     },
     {
         id: 10,
-        title: "ネットワーク設計・トポロジー構築実習",
+        title: "実践演習",
         category: "practical-labs",
         description: "Cisco Packet Tracerを使用した実践的なネットワーク設計・トポロジー構築演習。Router、Switch、VLAN、STP、OSPF、EIGRP、ACL、DHCP、DNS、HTTPなどの設定と実装を通じて、実際の企業ネットワーク構築に必要な知識とスキルを習得。",
         topologies: [
             {
-                name: "Hybrid Star-Bus-Tree Topology",
-                image: "topologies/Hybrid Star-Bus:Tree topology.png",
-                description: "複数のスター型ネットワークをルーターで相互接続したハイブリッド・ツリー構成。実社会における中小企業の拠点間通信を再現。左側（192.168.1.x）と右側（192.168.10.x）は独立したLAN環境。中央のルーター群（Router0, Router1, Router2）を介してデータ通信。HTTPサーバーやSYSLOGサーバーなどの集中管理機能に加え、セルタワーを通じたモバイル接続も組み込まれた実用的なモデル。"
-            },
-            {
-                name: "Enterprise Three-Tier Network",
-                image: "topologies/Enterprise WAN.png",
-                description: "3階層階層型モデル (Three-Tier Hierarchical Model)。コア層にロードバランサーとFirewall ASA、中間的なディストリビューション層はVLAN間のルーティングを制御。スケーラビリティに優れた信頼性の高いモデル。"
-            },
-            {
-                name: "Inter-VLAN & Site Connectivity",
-                image: "topologies/Inter-VLAN & Site Connectivity.png",
-                description: "マルチレイヤスイッチ (L3 Switch) とルーターを組み合わせた、現代のオフィスビルや小規模拠点における標準的なネットワーク設計。左側の構成では、2つのマルチレイヤスイッチがルーター（ISR4331）に集約されており、異なる部署（VLAN）間での効率的なデータ転送を可能にする「VLAN間ルーティング」の実装を示唆している。右側の独立した路由器とPCのセグメントは、シリアル接続やVPNを介した遠隔拠点との通信を表現しており、企業内でのセキュアな拠点間接続（Site-to-Site Connectivity）をシミュレートしている。"
-            },
-            {
-                name: "Advanced L3 Inter-VLAN Routing",
-                image: "topologies/Advanced L3 Inter-VLAN Routing.png",
-                description: "従来の「Router-on-a-stick」構成よりも高速なデータ処理を実現した、大規模オフィスやデータセンターの標準的な設計です。3560シリーズのL3スイッチがVLAN間通信をハードウェアレベルで高速処理し、上位ルーターが拠点間接続を担います。また、サーバーを特定スイッチに集約することで、効率的なリソース管理とセキュリティを両立させています。"
+                name: "L3スイッチとIoTを統合した次世代ネットワーク構成",
+                image: "topologies/Next-Generation Network Architecture- Integrating L3 Switching & IoT.png",
+                description: "3560シリーズのL3スイッチによる高速VLAN間ルーティングに加え、最新のIoTエコシステムを融合させた高度なアーキテクチャ。ウェブカメラ、スモークディテクター、スマートカーなどのIoTデバイスがホームゲートウェイやクラウドを介して相互に接続されている。上位のISRルーターが拠点間接続をセキュアに管理し、サーバーを集約することでデータ処理の効率化と強固なセキュリティを両立。スマートオフィスや産業自動化において最も標準的かつ実用的な設計モデル。"
             },
             {
                 name: "L3スイッチによる高速VLAN間ルーティング構成",
@@ -86,9 +71,24 @@ const projectsData = [
                 description: "3560シリーズのL3スイッチを核とした、大規模組織向けの標準的なネットワークアーキテクチャ。従来のルーター集約型（Router-on-a-stick）よりも高速なハードウェア処理により、異なる部署（VLAN）間のスムーズな通信を実現。上位ルーターが拠点間接続（Site-to-Site Connectivity）を担い、サーバーを特定スイッチに集約することで、管理の効率化と強固なセキュリティを両立させた実用的な設計。"
             },
             {
-                name: "L3スイッチとIoTを統合した次世代ネットワーク構成",
-                image: "topologies/Next-Generation Network Architecture- Integrating L3 Switching & IoT.png",
-                description: "3560シリーズのL3スイッチによる高速VLAN間ルーティングに加え、最新のIoTエコシステムを融合させた高度なアーキテクチャ。ウェブカメラ、スモークディテクター、スマートカーなどのIoTデバイスがホームゲートウェイやクラウドを介して相互に接続されている。上位のISRルーターが拠点間接続をセキュアに管理し、サーバーを集約することでデータ処理の効率化と強固なセキュリティを両立。スマートオフィスや産業自動化において最も標準的かつ実用的な設計モデル。"
+                name: "Advanced L3 Inter-VLAN Routing",
+                image: "topologies/Advanced L3 Inter-VLAN Routing.png",
+                description: "従来の「Router-on-a-stick」構成よりも高速なデータ処理を実現した、大規模オフィスやデータセンターの標準的な設計です。3560シリーズのL3スイッチがVLAN間通信をハードウェアレベルで高速処理し、上位ルーターが拠点間接続を担います。また、サーバーを特定スイッチに集約することで、効率的なリソース管理とセキュリティを両立させています。"
+            },
+            {
+                name: "Inter-VLAN & Site Connectivity",
+                image: "topologies/Inter-VLAN & Site Connectivity.png",
+                description: "マルチレイヤスイッチ (L3 Switch) とルーターを組み合わせた、現代のオフィスビルや小規模拠点における標準的なネットワーク設計。左側の構成では、2つのマルチレイヤスイッチがルーター（ISR4331）に集約されており、異なる部署（VLAN）間での効率的なデータ転送を可能にする「VLAN間ルーティング」の実装を示唆している。右側の独立したルーターとPCのセグメントは、シリアル接続やVPNを介した遠隔拠点との通信を表現しており、企業内でのセキュアな拠点間接続（Site-to-Site Connectivity）をシミュレートしている。"
+            },
+            {
+                name: "Enterprise Three-Tier Network",
+                image: "topologies/Enterprise WAN.png",
+                description: "3階層階層型モデル (Three-Tier Hierarchical Model)。コア層にロードバランサーとFirewall ASA、中間的なディストリビューション層はVLAN間のルーティングを制御。スケーラビリティに優れた信頼性の高いモデル。"
+            },
+            {
+                name: "Hybrid Star-Bus-Tree Topology",
+                image: "topologies/Hybrid Star-Bus:Tree topology.png",
+                description: "複数のスター型ネットワークをルーターで相互接続したハイブリッド・ツリー構成。実社会における中小企業の拠点間通信を再現。左側（192.168.1.x）と右側（192.168.10.x）は独立したLAN環境。中央のルーター群（Router0, Router1, Router2）を介してデータ通信。HTTPサーバーやSYSLOGサーバーなどの集中管理機能に加え、セルタワーを通じたモバイル接続も組み込まれた実用的なモデル。"
             }
         ]
     }
@@ -314,3 +314,4 @@ document.addEventListener('keydown', function (e) {
         closeTopologyModal();
     }
 });
+
