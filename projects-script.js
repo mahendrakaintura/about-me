@@ -46,7 +46,9 @@ const projectsData = [
         id: 8,
         title: "CTFチャレンジソリューション",
         category: "cybersecurity",
-        description: "暗号化、リ버스エンジニアリング、Web攻略を含むCapture The Flagチャレンジを解決しました。"
+        description: "暗号化、リ버스エンジニアリング、Web攻略を含むCapture The Flagチャレンジを解決しました。",
+        link: "https://tryhackme.com/p/helloboy1",
+        tryhackme: true
     },
     {
         id: 9,
@@ -88,7 +90,7 @@ const projectsData = [
             {
                 name: "Hybrid Star-Bus-Tree Topology",
                 image: "topologies/Hybrid Star-Bus:Tree topology.png",
-                description: "複数のスター型ネットワークをルーターで相互接続したハイブリッド・ツリー構成。実社会における中小企業の拠点間通信を再現。左側（192.168.1.x）と右側（192.168.10.x）は独立したLAN環境。中央のルーター群（Router0, Router1, Router2）を介してデータ通信。HTTPサーバーやSYSLOGサーバーなどの集中管理機能に加え、セルタワーを通じたモバイル接続も組み込まれた実用的なモデル。"
+                description: "この構成では、左側と右側の各セクションにデバイスがスイッチ（2960-24TT）を中心に接続された「スター型トポロジー (Star Topology)」が採用されており、それらがルーター（1941 Router）を介して相互に接続されています。中央部分では、複数のルーターがシリアルリンク（赤色のギザギザ線）で結ばれた「メッシュ型トポロジー (Partial Mesh)」のような構造を持っており、さらにセルタワーを通じたワイヤレス接続も組み込まれています。要するに、複数の異なるトポロジー（スター型、ポイントツーポイント、ワイヤレス）を組み合わせて一つの大きな企業ネットワーク（WAN/LAN）を構築しているため、非常に柔軟で拡張性の高い設計になっています。"
             }
         ]
     }
@@ -172,20 +174,41 @@ function renderProjects(category) {
     displayProjects.forEach((project) => {
         const projectItem = document.createElement('div');
         projectItem.className = 'project-item';
-        projectItem.innerHTML = `
+
+        let projectContent = `
             <div class="project-item-content">
                 <h3 class="project-item-title">${project.title}</h3>
                 <p class="project-item-description">${project.description}</p>
             </div>
-            <button class="project-scroll-btn">
-                <span class="scroll-text">詳細</span>
-                <div class="scroll-arrow">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
         `;
+
+        // Show scroll button - CTF has link with TryHackMe icon
+        if (project.tryhackme && project.link) {
+            projectContent += `
+                <a href="${project.link}" target="_blank" class="project-scroll-btn" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img src="svg/new.png" alt="TryHackMe" style="width: 16px; height: 16px; border-radius: 3px;">
+                    <span class="scroll-text">TryHackMe</span>
+                    <div class="scroll-arrow">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            `;
+        } else {
+            projectContent += `
+                <button class="project-scroll-btn">
+                    <span class="scroll-text">詳細</span>
+                    <div class="scroll-arrow">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            `;
+        }
+
+        projectItem.innerHTML = projectContent;
         projectsContainer.appendChild(projectItem);
     });
 }
