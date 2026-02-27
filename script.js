@@ -40,6 +40,8 @@ document.addEventListener('click', function (e) {
 // Tab Navigation
 document.querySelectorAll('.tab-btn').forEach(button => {
     button.addEventListener('click', () => {
+        console.log('Tab clicked:', button.getAttribute('data-tab'));
+
         // Get the parent tabs container
         const tabsContainer = button.closest('.tabs-container');
 
@@ -51,12 +53,19 @@ document.querySelectorAll('.tab-btn').forEach(button => {
 
         // Get the tab name from data attribute
         const tabName = button.getAttribute('data-tab');
+        console.log('Showing tab:', tabName);
 
         // Hide all tab contents in this container
-        tabsContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        tabsContainer.querySelectorAll('.tab-content').forEach(content => {
+            console.log('Hiding content:', content.id);
+            content.classList.remove('active');
+        });
 
         // Show the selected tab content
-        document.getElementById(tabName).classList.add('active');
+        const targetTab = document.getElementById(tabName);
+        console.log('Target element:', targetTab);
+        targetTab.classList.add('active');
+        console.log('Added active to:', tabName);
     });
 });
 
